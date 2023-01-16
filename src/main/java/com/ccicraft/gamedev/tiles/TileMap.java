@@ -21,7 +21,7 @@ public class TileMap extends Pane implements DeltaTime {
     }
 
     // Variables
-    private List<Tile> tiles = new ArrayList<>();
+    // private List<Tile> tiles = new ArrayList<>();
     private Vector2D nextTilePosition = new Vector2D(0, 0);
 
     // Interface implementation
@@ -70,7 +70,7 @@ public class TileMap extends Pane implements DeltaTime {
             nextTilePosition.x = 0;
             nextTilePosition.y += SpriteManager.SPRITE_SIZE_PX;
         }
-        tiles.add(tile);
+        // tiles.add(tile);
         getChildren().add(tile);
     }
 

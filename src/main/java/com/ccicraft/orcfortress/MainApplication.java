@@ -1,8 +1,10 @@
 package com.ccicraft.orcfortress;
 
 import com.ccicraft.gamedev.*;
+import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.gamedev.resources.ResourceType;
 import com.ccicraft.gamedev.tiles.TileMap;
+import com.ccicraft.gamedev.characters.Character;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -12,6 +14,8 @@ import java.io.IOException;
 public class MainApplication extends Application {
     public static int SCREEN_WIDTH = 1600;
     public static int SCREEN_HEIGHT = 900;
+    public static final String DWARF = "Dwarf";
+    public static final String ORC = "Orc";
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -27,6 +31,18 @@ public class MainApplication extends Application {
             tm.placeTile("Forest", SpriteManager.cropSprite(2, 2), new ResourceType());
         }
         root.getChildren().add(tm);
+
+        for (int i = 0; i < 5; i++) {
+            root.getChildren().add(
+                    CharacterManager.createCharacter(DWARF,
+                    SpriteManager.cropSprite(15, 8),
+                    1.25f,
+                    1.15f,
+                    1.f,
+                    1.f)
+            );
+        }
+
         root.startTimer();
         tm.startTimer();
     }

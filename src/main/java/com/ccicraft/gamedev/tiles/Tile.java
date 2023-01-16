@@ -1,10 +1,10 @@
 package com.ccicraft.gamedev.tiles;
 
 import com.ccicraft.gamedev.Actor;
+import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.maths.Vector2D;
+import com.ccicraft.gamedev.characters.Character;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class Tile extends Actor {
     }
 
     // Variables
-    public ArrayList<Character> workersList;
+    public List<Character> workersList = new ArrayList<>();
     private int tileResources;
     private int densityResources;
     protected TileType type;
@@ -37,27 +37,45 @@ public class Tile extends Actor {
         // System.out.println("This is a Tile");
     }
 
-    private void setClickable() {
-        setPickOnBounds(true);
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("Clicked on a tile !!");
-            }
-        });
-    }
-
-    private int gatherResources() {
-        int stack = workersList.size() * densityResources;
-        setTileResources(tileResources - stack);
-        return stack;
-    }
-
     public void revealTile() {
         if (CURRENT_STATE == STATE.DISCOVERED) {
             return;
         }
         CURRENT_STATE = STATE.DISCOVERED;
+    }
+
+    public void placeCharacter(List<Character> workers) {
+        if (workers.size() < 1) {
+            System.out.println("This is an empty tile");
+        }
+
+        revealTile();
+        while(workers.iterator().hasNext()) {
+            Character worker = workers.iterator().next();
+            workersList.add(worker);
+            worker.setX(getX());
+            worker.setY(getY());
+            CharacterManager.deselectCharacter(worker);
+        }
+    }
+
+    private void setClickable() {
+        setPickOnBounds(true);
+        setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                placeCharacter(CharacterManager.getSelectedWorkers());
+            }
+        });
+    }
+
+    private int gatherResources() {
+        if (tileResources <= 0) {
+            return 0;
+        }
+        int stack = workersList.size() * densityResources;
+        setTileResources(tileResources - stack);
+        return stack;
     }
 
     // Getters & Setters
