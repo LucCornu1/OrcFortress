@@ -11,15 +11,15 @@ public class CharacterManager {
     // Constructor
 
     // Variables
-    private static List<Character> selectedWorkers = new ArrayList<>();
+    private static Character selectedWorker = null;
 
     // Methods
     public static void selectCharacter(Character worker) {
-        selectedWorkers.add(worker);
+        selectedWorker = worker;
     }
 
-    public static void deselectCharacter(Character worker) {
-        selectedWorkers.remove(worker);
+    public static void deselectCharacter() {
+        selectedWorker = null;
     }
 
     public static Character createCharacter(String species, Image image, float ms, float gs, float cs, float hs) {
@@ -28,11 +28,15 @@ public class CharacterManager {
         return worker;
     }
 
-    public static List<Character> getSelectedWorkers() {
-        return selectedWorkers;
+    public static Character getSelectedWorker() {
+        return selectedWorker;
     }
 
     public static Boolean isSelected(Character worker) {
-        return selectedWorkers.contains(worker);
+        return selectedWorker == worker;
+    }
+
+    public static Boolean isAnySelected() {
+        return selectedWorker != null;
     }
 }

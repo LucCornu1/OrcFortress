@@ -36,7 +36,7 @@ public class Character extends Actor {
 
     private void selectSelf() {
         if (CharacterManager.isSelected(this)) {
-            CharacterManager.deselectCharacter(this);
+            CharacterManager.deselectCharacter();
             System.out.println("Character deselected");
             return;
         }

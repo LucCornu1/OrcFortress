@@ -1,6 +1,7 @@
 package com.ccicraft.gamedev.tiles;
 
 import com.ccicraft.gamedev.Actor;
+import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.maths.Vector2D;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -31,25 +32,35 @@ public class Tile extends Actor {
         // System.out.println("This is a Tile");
     }
 
-    public void revealTile() {
-        if (CURRENT_STATE == STATE.DISCOVERED) {
-            return;
-        }
-        CURRENT_STATE = STATE.DISCOVERED;
-        setImage(type.tileSprite);
-        Node parent = getParent();
-        if (parent instanceof TileMap) {
-            TileMap tm = (TileMap) parent;
-            tm.revealNeighbours(this);
-        }
-    }
-
     public void revealSingle() {
         if (CURRENT_STATE == STATE.DISCOVERED) {
             return;
         }
         CURRENT_STATE = STATE.DISCOVERED;
         setImage(type.tileSprite);
+    }
+
+    private void revealTile() {
+        Node parent = getParent();
+        if (parent instanceof TileMap) {
+            TileMap tm = (TileMap) parent;
+            tm.revealNeighbours(this);
+        }
+        if (CURRENT_STATE == STATE.DISCOVERED) {
+            return;
+        }
+        CURRENT_STATE = STATE.DISCOVERED;
+        setImage(type.tileSprite);
+    }
+
+    private void placeCharacter() {
+        if (!CharacterManager.isAnySelected()) {
+            return;
+        }
+        CharacterManager.getSelectedWorker().setX(getX());
+        CharacterManager.getSelectedWorker().setY(getY());
+        CharacterManager.deselectCharacter();
+        revealTile();
     }
 
     private void setClickable() {
@@ -59,7 +70,7 @@ public class Tile extends Actor {
             public void handle(MouseEvent mouseEvent) {
                 System.out.println("This tile is a : " + type.name);
                 System.out.println("It has : " + tileResources + " resources left");
-                revealTile();
+                placeCharacter();
             }
         });
     }
