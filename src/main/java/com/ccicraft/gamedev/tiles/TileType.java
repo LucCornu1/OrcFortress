@@ -1,5 +1,6 @@
 package com.ccicraft.gamedev.tiles;
 
+import com.ccicraft.gamedev.SpriteManager;
 import javafx.scene.image.Image;
 import com.ccicraft.gamedev.resources.ResourceType;
 
@@ -13,10 +14,14 @@ public class TileType {
 
     // Variables
     public String name;
-    protected Image tileSprite = null;
     protected ResourceType resourceTypeGathered;
+    protected Image tileSprite = null;
+    private static final Image hiddenSprite = SpriteManager.cropSprite(19, 9);
 
     // Methods
 
     // Getters & Setters
+    public static Image getHiddenSprite() {
+        return hiddenSprite;
+    }
 }

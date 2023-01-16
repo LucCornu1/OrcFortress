@@ -16,6 +16,7 @@ public class MainApplication extends Application {
     public static int SCREEN_HEIGHT = 900;
     public static final String DWARF = "Dwarf";
     public static final String ORC = "Orc";
+    public static final int MAP_SIZE = 377;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -27,7 +28,7 @@ public class MainApplication extends Application {
         stage.show();
 
         TileMap tm = new TileMap();
-        for (int i = 0; i < 377; i++) {
+        for (int i = 0; i < MAP_SIZE; i++) {
             tm.placeTile("Forest", SpriteManager.cropSprite(2, 2), new ResourceType());
         }
         root.getChildren().add(tm);
