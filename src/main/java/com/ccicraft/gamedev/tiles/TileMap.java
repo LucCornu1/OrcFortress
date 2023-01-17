@@ -1,8 +1,7 @@
 package com.ccicraft.gamedev.tiles;
 
+import com.ccicraft.gamedev.Actor;
 import com.ccicraft.gamedev.DeltaTime;
-import com.ccicraft.gamedev.GameObject;
-import com.ccicraft.gamedev.Level;
 import com.ccicraft.gamedev.SpriteManager;
 import com.ccicraft.gamedev.resources.ResourceType;
 import com.ccicraft.maths.Vector2D;
@@ -46,9 +45,9 @@ public class TileMap extends Pane implements DeltaTime {
         float deltaTime = computeDeltaTime();
 
         for (Node child: getChildren()) {
-            if (child instanceof GameObject) {
-                GameObject go = (GameObject) child;
-                go.update(deltaTime);
+            if (child instanceof Actor) {
+                Actor a = (Actor) child;
+                a.update(deltaTime);
             }
         }
     }
@@ -126,6 +125,16 @@ public class TileMap extends Pane implements DeltaTime {
         if (child != null && child instanceof Tile) {
             Tile t = (Tile) child;
             t.revealSingle();
+        }
+    }
+
+    // Methods
+    public void changeScale(double xScale, double yScale) {
+        for (Node child: getChildren()) {
+            if (child instanceof Actor) {
+                Actor a = (Actor) child;
+                a.scale(xScale, yScale);
+            }
         }
     }
 

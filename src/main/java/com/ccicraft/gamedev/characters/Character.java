@@ -26,12 +26,7 @@ public class Character extends Actor {
 
     private void setClickable() {
         setPickOnBounds(true);
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                selectSelf();
-            }
-        });
+        setOnMouseClicked(mouseEvent -> selectSelf());
     }
 
     private void selectSelf() {

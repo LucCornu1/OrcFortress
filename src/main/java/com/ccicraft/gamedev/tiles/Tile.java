@@ -65,13 +65,10 @@ public class Tile extends Actor {
 
     private void setClickable() {
         setPickOnBounds(true);
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("This tile is a : " + type.name);
-                System.out.println("It has : " + tileResources + " resources left");
-                placeCharacter();
-            }
+        setOnMouseClicked(mouseEvent -> {
+            System.out.println("This tile is a : " + type.name);
+            System.out.println("It has : " + tileResources + " resources left");
+            placeCharacter();
         });
     }
 

@@ -43,9 +43,9 @@ public class Level extends Pane implements DeltaTime {
         float deltaTime = computeDeltaTime();
 
         for (Node child: getChildren()) {
-            if (child instanceof GameObject) {
-                GameObject go = (GameObject) child;
-                go.update(deltaTime);
+            if (child instanceof Actor) {
+                Actor a = (Actor) child;
+                a.update(deltaTime);
             }
         }
     }
@@ -57,6 +57,16 @@ public class Level extends Pane implements DeltaTime {
     public void stopTimer() {
         timer.stop();
         getChildren().removeAll();
+    }
+
+    // Methods
+    public void changeScale(double xScale, double yScale) {
+        for (Node child: getChildren()) {
+            if (child instanceof Actor) {
+                Actor a = (Actor) child;
+                a.scale(xScale, yScale);
+            }
+        }
     }
 
 }

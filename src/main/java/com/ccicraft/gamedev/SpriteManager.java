@@ -13,9 +13,11 @@ public class SpriteManager {
     }
 
     // Variables
+    private static final int BASE_SPRITE_SIZE = 13;
+    public static final int SCALE_IMAGE = 4;
+    public static int SPRITE_SIZE_PX = BASE_SPRITE_SIZE * SCALE_IMAGE;
     private static final int IMAGE_WIDTH = 261;
     private static final int IMAGE_HEIGHT = 131;
-    private static final int SCALE_IMAGE = 4;
     private static final int scaledWidthSize = IMAGE_WIDTH * SCALE_IMAGE;
     private static final int scaleHeightSize = IMAGE_HEIGHT * SCALE_IMAGE;
     private static final String IMAGE_PATH = "src/resources/colored.png";
@@ -32,7 +34,6 @@ public class SpriteManager {
             throw new RuntimeException(e);
         }
     }
-    public static final int SPRITE_SIZE_PX = 13 * SCALE_IMAGE;
 
     // Methods
     // #Static method that crops part out of the image and returns it

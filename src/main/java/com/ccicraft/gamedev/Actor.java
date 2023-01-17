@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.ccicraft.maths.*;
 
-public class Actor extends GameObject {
+public class Actor extends ImageView {
     // Constructor
     public Actor(Image image) {
         setImage(image);
@@ -41,9 +41,13 @@ public class Actor extends GameObject {
     protected Rectangle2D[][] cellClips;
 
     // Methods
-    @Override
     public void update(float delta) {
         // pass
+    }
+
+    public void scale(double xScale, double yScale) {
+        setScaleX(getScaleX() + xScale);
+        setScaleY(getScaleY() + yScale);
     }
 
     // Getters & Setters
