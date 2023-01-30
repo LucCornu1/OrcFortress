@@ -42,14 +42,14 @@ public class Level implements DeltaTime {
             return;
         }
 
-        GameManager.root.renderedActors.clear();
+        GameManager.root.getRenderedActors().clear();
 
         for (GameObject child: getChildren()) {
             child.update(deltaTime);
 
             if (child instanceof Actor) {
                 Actor actor = (Actor) child;
-                GameManager.root.renderedActors.add(actor);
+                GameManager.root.getRenderedActors().add(actor);
             }
         }
     }

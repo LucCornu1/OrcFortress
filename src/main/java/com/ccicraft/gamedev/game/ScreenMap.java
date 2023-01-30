@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /***
  * I wanted to have two threads, one for game logic and another one for rendering
- * But it was too much work, so I decided to go with only one instead
+ * But it was too much work for too little time, so I decided to go with only one instead
  * ***/
 
 public class ScreenMap extends GameObject {
@@ -22,8 +22,7 @@ public class ScreenMap extends GameObject {
     private Pane screen = new Pane();
     // private List<Tile> tiles = new ArrayList<>();
     private Vector2D nextTilePosition = new Vector2D(0, 0);
-
-    public ArrayList<Actor> renderedActors = new ArrayList<>();
+    private ArrayList<Actor> renderedActors = new ArrayList<>();
 
     // Interface implementation
     private AnimationTimer timer = new AnimationTimer() {
@@ -128,5 +127,13 @@ public class ScreenMap extends GameObject {
 
     public void setScreen(Pane screen) {
         this.screen = screen;
+    }
+
+    public synchronized ArrayList<Actor> getRenderedActors() {
+        return renderedActors;
+    }
+
+    public synchronized void setRenderedActors(ArrayList<Actor> renderedActors) {
+        this.renderedActors = renderedActors;
     }
 }
