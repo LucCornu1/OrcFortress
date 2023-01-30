@@ -1,4 +1,4 @@
-package com.ccicraft.gamedev;
+package com.ccicraft.gamedev.game;
 
 import javafx.scene.image.*;
 

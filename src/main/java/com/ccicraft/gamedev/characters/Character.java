@@ -1,10 +1,8 @@
 package com.ccicraft.gamedev.characters;
 
-import com.ccicraft.gamedev.Actor;
+import com.ccicraft.gamedev.game.Actor;
 import com.ccicraft.maths.Vector2D;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 
 public class Character extends Actor {
     // Constructor
@@ -25,8 +23,8 @@ public class Character extends Actor {
     }
 
     private void setClickable() {
-        setPickOnBounds(true);
-        setOnMouseClicked(mouseEvent -> selectSelf());
+        // setPickOnBounds(true);
+        // setOnMouseClicked(mouseEvent -> selectSelf());
     }
 
     private void selectSelf() {

@@ -1,20 +1,20 @@
-package com.ccicraft.gamedev;
+package com.ccicraft.gamedev.game;
 
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.ccicraft.maths.*;
 
-public class Actor extends ImageView {
+public class Actor extends GameObject {
     // Constructor
     public Actor(Image image) {
-        setImage(image);
+        sprite = new ImageView(image);
     }
 
     public Actor(Image image, Vector2D pos) {
-        setImage(image);
-        setX(pos.x);
-        setY(pos.y);
+        sprite = new ImageView(image);
+        sprite.setX(pos.x);
+        sprite.setY(pos.y);
     }
 
     /*public Actor(Image image, Vector2D numCells, Vector2D firstFrame) {
@@ -37,6 +37,7 @@ public class Actor extends ImageView {
     }*/
 
     // Variables
+    protected ImageView sprite = null;
     protected Vector2D numCells;
     protected Rectangle2D[][] cellClips;
 
@@ -45,10 +46,12 @@ public class Actor extends ImageView {
         // pass
     }
 
-    public void scale(double xScale, double yScale) {
-        setScaleX(getScaleX() + xScale);
-        setScaleY(getScaleY() + yScale);
+    // Getters & Setters
+    public ImageView getSprite() {
+        return sprite;
     }
 
-    // Getters & Setters
+    public void setSprite(ImageView sprite) {
+        this.sprite = sprite;
+    }
 }

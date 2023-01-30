@@ -1,6 +1,6 @@
 package com.ccicraft.gamedev.tiles;
 
-import com.ccicraft.gamedev.SpriteManager;
+import com.ccicraft.gamedev.game.SpriteManager;
 import javafx.scene.image.Image;
 import com.ccicraft.gamedev.resources.ResourceType;
 

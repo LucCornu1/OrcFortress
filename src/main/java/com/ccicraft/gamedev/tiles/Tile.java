@@ -1,11 +1,7 @@
 package com.ccicraft.gamedev.tiles;
 
-import com.ccicraft.gamedev.Actor;
-import com.ccicraft.gamedev.characters.CharacterManager;
+import com.ccicraft.gamedev.game.Actor;
 import com.ccicraft.maths.Vector2D;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,7 +10,7 @@ public class Tile extends Actor {
     public Tile(Vector2D pos, TileType type) {
         super(TileType.getHiddenSprite(), pos);
         this.type = type;
-        setClickable();
+        // setClickable();
     }
 
     // Variables
@@ -32,25 +28,25 @@ public class Tile extends Actor {
         // System.out.println("This is a Tile");
     }
 
-    public void revealSingle() {
+    /*public void revealSingle() {
         if (CURRENT_STATE == STATE.DISCOVERED) {
             return;
         }
         CURRENT_STATE = STATE.DISCOVERED;
-        setImage(type.tileSprite);
+        sprite.setImage(type.tileSprite);
     }
 
     private void revealTile() {
-        Node parent = getParent();
-        if (parent instanceof TileMap) {
-            TileMap tm = (TileMap) parent;
+        Node parent = sprite.getParent();
+        if (parent instanceof ScreenMap) {
+            ScreenMap tm = (ScreenMap) parent;
             tm.revealNeighbours(this);
         }
         if (CURRENT_STATE == STATE.DISCOVERED) {
             return;
         }
         CURRENT_STATE = STATE.DISCOVERED;
-        setImage(type.tileSprite);
+        sprite.setImage(type.tileSprite);
     }
 
     private void placeCharacter() {
@@ -70,7 +66,7 @@ public class Tile extends Actor {
             System.out.println("It has : " + tileResources + " resources left");
             placeCharacter();
         });
-    }
+    }*/
 
     // Getters & Setters
     public int getTileResources() {
