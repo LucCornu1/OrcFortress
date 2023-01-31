@@ -1,5 +1,6 @@
 package com.ccicraft.orcfortress;
 
+import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.gamedev.game.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,6 +19,8 @@ public class MainApplication extends Application {
         stage.setTitle("OrcFortress");
         stage.setScene(scene);
         stage.show();
+
+        CharacterManager.createSpecies(GameManager.DWARF, SpriteManager.cropSprite(1, 1), 0.5f, 0.5f, 1.2f, 1.2f);
 
         Level currentLevel = new Level();
         currentLevel.startTimer();

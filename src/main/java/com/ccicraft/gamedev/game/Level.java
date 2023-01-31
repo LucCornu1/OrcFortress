@@ -1,8 +1,12 @@
 package com.ccicraft.gamedev.game;
 
+import com.ccicraft.gamedev.characters.Character;
+import com.ccicraft.gamedev.characters.CharacterManager;
+import com.ccicraft.maths.Vector2D;
 import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /***
  * The use of an AnimationTimer for game logic is not optimal, as it runs for each frame of the application
@@ -42,22 +46,26 @@ public class Level implements DeltaTime {
             return;
         }
 
-        GameManager.root.getRenderedActors().clear();
+        GameManager.root.clearRenderedActors();
+        ArrayList<Actor> newList = new ArrayList<>();
 
         for (GameObject child: getChildren()) {
             child.update(deltaTime);
 
             if (child instanceof Actor) {
                 Actor actor = (Actor) child;
-                GameManager.root.getRenderedActors().add(actor);
+                newList.add(actor);
             }
         }
+
+        GameManager.root.setRenderedActors(newList);
     }
 
     public void startTimer() {
-        getChildren().add(new Actor(SpriteManager.cropSprite(0,1)));
         timer.start();
         GameManager.root.startTimer();
+        getChildren().add(new Character(SpriteManager.cropSprite(0,1), new Vector2D(800.f, 190.f), CharacterManager.getSpecies(GameManager.DWARF)));
+
     }
 
     public void stopTimer() {

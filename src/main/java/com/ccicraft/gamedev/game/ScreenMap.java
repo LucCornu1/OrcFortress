@@ -33,17 +33,13 @@ public class ScreenMap extends GameObject {
     };
 
     public void update() {
-        screen.getChildren().clear();
-        Rectangle rect = new Rectangle(0, 0, 1920, 1080);
-        screen.getChildren().add(rect);
-
-        for (Actor next: renderedActors) {
-            screen.getChildren().add(next.getSprite());
-        }
+        // pass
     }
 
     public void startTimer() {
         timer.start();
+        Rectangle rect = new Rectangle(0, 0, 1920, 1080);
+        screen.getChildren().add(rect);
     }
 
     public void stopTimer() {
@@ -129,11 +125,19 @@ public class ScreenMap extends GameObject {
         this.screen = screen;
     }
 
-    public synchronized ArrayList<Actor> getRenderedActors() {
+    public ArrayList<Actor> getRenderedActors() {
         return renderedActors;
     }
 
-    public synchronized void setRenderedActors(ArrayList<Actor> renderedActors) {
+    public void setRenderedActors(ArrayList<Actor> renderedActors) {
         this.renderedActors = renderedActors;
+    }
+
+    public void addRenderedActor(Actor actor) {
+        screen.getChildren().add(actor.getSprite());
+    }
+
+    public void clearRenderedActors() {
+        renderedActors.clear();
     }
 }

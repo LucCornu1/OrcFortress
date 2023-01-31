@@ -23,8 +23,9 @@ public class Character extends Actor {
     }
 
     private void setClickable() {
-        // setPickOnBounds(true);
-        // setOnMouseClicked(mouseEvent -> selectSelf());
+        System.out.println("Lel");
+        sprite.setPickOnBounds(true);
+        sprite.setOnMouseClicked(mouseEvent -> selectSelf());
     }
 
     private void selectSelf() {

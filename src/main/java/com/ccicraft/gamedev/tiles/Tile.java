@@ -10,7 +10,7 @@ public class Tile extends Actor {
     public Tile(Vector2D pos, TileType type) {
         super(TileType.getHiddenSprite(), pos);
         this.type = type;
-        // setClickable();
+        setClickable();
     }
 
     // Variables
@@ -28,45 +28,21 @@ public class Tile extends Actor {
         // System.out.println("This is a Tile");
     }
 
-    /*public void revealSingle() {
+    public void revealTile() {
         if (CURRENT_STATE == STATE.DISCOVERED) {
             return;
         }
         CURRENT_STATE = STATE.DISCOVERED;
         sprite.setImage(type.tileSprite);
-    }
-
-    private void revealTile() {
-        Node parent = sprite.getParent();
-        if (parent instanceof ScreenMap) {
-            ScreenMap tm = (ScreenMap) parent;
-            tm.revealNeighbours(this);
-        }
-        if (CURRENT_STATE == STATE.DISCOVERED) {
-            return;
-        }
-        CURRENT_STATE = STATE.DISCOVERED;
-        sprite.setImage(type.tileSprite);
-    }
-
-    private void placeCharacter() {
-        if (!CharacterManager.isAnySelected()) {
-            return;
-        }
-        CharacterManager.getSelectedWorker().setX(getX());
-        CharacterManager.getSelectedWorker().setY(getY());
-        CharacterManager.deselectCharacter();
-        revealTile();
     }
 
     private void setClickable() {
-        setPickOnBounds(true);
-        setOnMouseClicked(mouseEvent -> {
+        sprite.setPickOnBounds(true);
+        sprite.setOnMouseClicked(mouseEvent -> {
             System.out.println("This tile is a : " + type.name);
             System.out.println("It has : " + tileResources + " resources left");
-            placeCharacter();
         });
-    }*/
+    }
 
     // Getters & Setters
     public int getTileResources() {

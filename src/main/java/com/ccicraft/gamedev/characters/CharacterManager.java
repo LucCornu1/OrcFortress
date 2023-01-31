@@ -22,10 +22,12 @@ public class CharacterManager {
         selectedWorker = null;
     }
 
-    public static Character createCharacter(String species, Image image, float ms, float gs, float cs, float hs) {
-        CharacterType type = CharacterFactory.getCharacterType(species, image, ms, gs, cs, hs);
-        Character worker = new Character(image, new Vector2D(0.f, 0.f), type);
-        return worker;
+    public static CharacterType createSpecies(String species, Image image, float ms, float gs, float cs, float hs) {
+        return CharacterFactory.getCharacterType(species, image, ms, gs, cs, hs);
+    }
+
+    public static CharacterType getSpecies(String species) {
+        return CharacterFactory.getCharacterType(species);
     }
 
     public static Character getSelectedWorker() {

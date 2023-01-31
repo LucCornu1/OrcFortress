@@ -9,12 +9,14 @@ public class Actor extends GameObject {
     // Constructor
     public Actor(Image image) {
         sprite = new ImageView(image);
+        GameManager.root.addRenderedActor(this);
     }
 
     public Actor(Image image, Vector2D pos) {
         sprite = new ImageView(image);
         sprite.setX(pos.x);
         sprite.setY(pos.y);
+        GameManager.root.addRenderedActor(this);
     }
 
     /*public Actor(Image image, Vector2D numCells, Vector2D firstFrame) {
