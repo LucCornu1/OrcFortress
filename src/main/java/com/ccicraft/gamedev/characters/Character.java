@@ -2,6 +2,7 @@ package com.ccicraft.gamedev.characters;
 
 import com.ccicraft.gamedev.game.Actor;
 import com.ccicraft.gamedev.game.SpriteManager;
+import com.ccicraft.gamedev.tiles.Tile;
 import com.ccicraft.maths.Vector2D;
 import javafx.scene.image.Image;
 
@@ -24,7 +25,7 @@ public class Character extends Actor {
     public void update(float delta) {
         super.update(delta);
 
-        characterAction();
+        characterAction(); // Maybe use a state pattern instead ?
     }
 
     protected void moveCharacter(Vector2D target, Vector2D self) {
@@ -33,6 +34,10 @@ public class Character extends Actor {
         getSprite().setX(currentX);
         double currentY = self.y + characterSpeed * Math.sin(angle);
         getSprite().setY(currentY);
+    }
+
+    protected void gatherResources(Tile targetTile) {
+        targetTile.gatherResources(type);
     }
 
     private void characterAction() {
@@ -49,6 +54,11 @@ public class Character extends Actor {
         Vector2D t = new Vector2D(targetX, targetY);
 
         if (t.computeDistance(v) < SpriteManager.SPRITE_SIZE_PX) {
+            if (target instanceof Tile)
+            {
+                ((Tile) target).revealTile();
+                gatherResources((Tile) target);
+            }
             return;
         }
         moveCharacter(t, v);
@@ -57,7 +67,6 @@ public class Character extends Actor {
 
     // Clickable
     private void setClickable() {
-        System.out.println("Lel");
         sprite.setPickOnBounds(true);
         sprite.setOnMouseClicked(mouseEvent -> selectSelf());
     }

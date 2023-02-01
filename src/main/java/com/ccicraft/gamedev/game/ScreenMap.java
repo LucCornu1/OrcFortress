@@ -48,7 +48,7 @@ public class ScreenMap extends GameObject {
     }
 
     // Methods
-    /*public void placeTile(String name, Image image, ResourceType resourceType) {
+    /*public void placeTile(String name, Image image, ResourceFactory resourceType) {
         TileType type = TileFactory.getTileType(name, image, resourceType);
         Tile tile = new Tile(nextTilePosition, type);
         nextTilePosition.x += SpriteManager.SPRITE_SIZE_PX;

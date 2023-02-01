@@ -15,13 +15,44 @@ public class CharacterType {
 
     // Variables
     public String species;
-    public float miningSpeed = 1.f;
-    public float gatheringSpeed = 1.f;
-    public float choppingSpeed = 1.f;
-    public float huntingSpeed = 1.f;
     protected Image characterSprite;
+    private float miningSpeed = 1.f;
+    private float gatheringSpeed = 1.f;
+    private float choppingSpeed = 1.f;
+    private float huntingSpeed = 1.f;
 
     // Methods
 
     // Getters & Setters
+    public float getMiningSpeed() {
+        return miningSpeed;
+    }
+
+    public void setMiningSpeed(float miningSpeed) {
+        this.miningSpeed = miningSpeed;
+    }
+
+    public float getGatheringSpeed() {
+        return gatheringSpeed;
+    }
+
+    public void setGatheringSpeed(float gatheringSpeed) {
+        this.gatheringSpeed = gatheringSpeed;
+    }
+
+    public float getChoppingSpeed() {
+        return choppingSpeed;
+    }
+
+    public void setChoppingSpeed(float choppingSpeed) {
+        this.choppingSpeed = choppingSpeed;
+    }
+
+    public float getHuntingSpeed() {
+        return huntingSpeed;
+    }
+
+    public void setHuntingSpeed(float huntingSpeed) {
+        this.huntingSpeed = huntingSpeed;
+    }
 }

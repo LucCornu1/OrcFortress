@@ -22,10 +22,6 @@ public class CharacterManager {
         selectedWorker = null;
     }
 
-    public static CharacterType createSpecies(String species, Image image, float ms, float gs, float cs, float hs) {
-        return CharacterFactory.getCharacterType(species, image, ms, gs, cs, hs);
-    }
-
     public static CharacterType getSpecies(String species) {
         return CharacterFactory.getCharacterType(species);
     }

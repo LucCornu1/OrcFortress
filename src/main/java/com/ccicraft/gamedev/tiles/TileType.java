@@ -1,20 +1,21 @@
 package com.ccicraft.gamedev.tiles;
 
 import com.ccicraft.gamedev.game.SpriteManager;
-import javafx.scene.image.Image;
 import com.ccicraft.gamedev.resources.ResourceType;
+import javafx.scene.image.Image;
 
 public class TileType {
     // Constructor
-    public TileType(String name, Image tileSprite, ResourceType resourceTypeGathered) {
+    public TileType(String name, Image tileSprite, ResourceType resourceFactoryGathered) {
         this.name = name;
         this.tileSprite = tileSprite;
-        this.resourceTypeGathered = resourceTypeGathered;
+        this.resourceGathered = resourceFactoryGathered;
     }
 
     // Variables
     public String name;
-    protected ResourceType resourceTypeGathered;
+
+    protected ResourceType resourceGathered;
     protected Image tileSprite = null;
     private static final Image hiddenSprite = SpriteManager.cropSprite(19, 9);
 
@@ -23,5 +24,13 @@ public class TileType {
     // Getters & Setters
     public static Image getHiddenSprite() {
         return hiddenSprite;
+    }
+
+    public ResourceType getResourceGathered() {
+        return resourceGathered;
+    }
+
+    public void setResourceGathered(ResourceType resourceGathered) {
+        this.resourceGathered = resourceGathered;
     }
 }

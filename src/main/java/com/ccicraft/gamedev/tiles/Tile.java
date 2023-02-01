@@ -1,6 +1,8 @@
 package com.ccicraft.gamedev.tiles;
 
 import com.ccicraft.gamedev.characters.CharacterManager;
+import com.ccicraft.gamedev.characters.Character;
+import com.ccicraft.gamedev.characters.CharacterType;
 import com.ccicraft.gamedev.game.Actor;
 import com.ccicraft.maths.Vector2D;
 
@@ -35,6 +37,26 @@ public class Tile extends Actor {
         }
         CURRENT_STATE = STATE.DISCOVERED;
         sprite.setImage(type.tileSprite);
+    }
+
+    public void gatherResources(CharacterType species) {
+        if (tileResources <= 0) { // Need to take into account that you cannot gather more resources than there is left
+            return;
+        }
+
+        int gatherAmount = switch(getType().getResourceGathered().getGatherMethod()) {
+            case MINING -> (int) species.getMiningSpeed() * 2;
+            case GATHERING -> (int) species.getGatheringSpeed() * 2;
+            case HUNTING -> (int) species.getHuntingSpeed() * 2;
+            case CHOPPING -> (int) species.getChoppingSpeed() * 2;
+            case NONE -> 1;
+        };
+
+        type.getResourceGathered().addResource(gatherAmount);
+        tileResources -= gatherAmount;
+        // System.out.println(type.getResourceGathered().name
+        // + " count : "
+        // + type.getResourceGathered().getResourceCount());
     }
 
     private void setClickable() {

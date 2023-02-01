@@ -1,5 +1,6 @@
 package com.ccicraft.gamedev.tiles;
 
+import com.ccicraft.gamedev.resources.ResourceFactory;
 import com.ccicraft.gamedev.resources.ResourceType;
 import javafx.scene.image.Image;
 

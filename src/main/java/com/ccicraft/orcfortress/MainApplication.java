@@ -1,5 +1,6 @@
 package com.ccicraft.orcfortress;
 
+import com.ccicraft.gamedev.characters.CharacterFactory;
 import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.gamedev.game.*;
 import javafx.application.Application;
@@ -20,7 +21,13 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        CharacterManager.createSpecies(GameManager.DWARF, SpriteManager.cropSprite(1, 1), 0.5f, 0.5f, 1.2f, 1.2f);
+        // Use a builder pattern to avoid long constructors ?
+        CharacterFactory.getCharacterType(GameManager.DWARF,
+                SpriteManager.cropSprite(1, 1),
+                0.5f,
+                0.5f,
+                1.2f,
+                1.2f);
 
         Level currentLevel = new Level();
         currentLevel.startTimer();
@@ -28,7 +35,7 @@ public class MainApplication extends Application {
         /*ScreenMap tm = new ScreenMap();
         root.getChildren().add(new Rectangle(0, 0, 1920, 1080));
         for (int i = 0; i < MAP_SIZE; i++) {
-            tm.placeTile("Forest", SpriteManager.cropSprite(2, 2), new ResourceType());
+            tm.placeTile("Forest", SpriteManager.cropSprite(2, 2), new ResourceFactory());
         }
         root.getChildren().add(tm);
 
