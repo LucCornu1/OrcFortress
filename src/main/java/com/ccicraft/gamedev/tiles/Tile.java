@@ -1,5 +1,6 @@
 package com.ccicraft.gamedev.tiles;
 
+import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.gamedev.game.Actor;
 import com.ccicraft.maths.Vector2D;
 
@@ -41,6 +42,10 @@ public class Tile extends Actor {
         sprite.setOnMouseClicked(mouseEvent -> {
             System.out.println("This tile is a : " + type.name);
             System.out.println("It has : " + tileResources + " resources left");
+
+            if (CharacterManager.isAnySelected()) {
+                CharacterManager.getSelectedWorker().setTarget(this);
+            }
         });
     }
 

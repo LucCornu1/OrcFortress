@@ -21,7 +21,7 @@ public class ScreenMap extends GameObject {
     // Variables
     private Pane screen = new Pane();
     // private List<Tile> tiles = new ArrayList<>();
-    private Vector2D nextTilePosition = new Vector2D(0, 0);
+    private Vector2D nextTilePosition = new Vector2D(0.0, 0.0);
     private ArrayList<Actor> renderedActors = new ArrayList<>();
 
     // Interface implementation

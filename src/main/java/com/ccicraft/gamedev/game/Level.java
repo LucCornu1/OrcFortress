@@ -2,6 +2,9 @@ package com.ccicraft.gamedev.game;
 
 import com.ccicraft.gamedev.characters.Character;
 import com.ccicraft.gamedev.characters.CharacterManager;
+import com.ccicraft.gamedev.resources.ResourceType;
+import com.ccicraft.gamedev.tiles.Tile;
+import com.ccicraft.gamedev.tiles.TileType;
 import com.ccicraft.maths.Vector2D;
 import javafx.animation.AnimationTimer;
 
@@ -64,8 +67,11 @@ public class Level implements DeltaTime {
     public void startTimer() {
         timer.start();
         GameManager.root.startTimer();
-        getChildren().add(new Character(SpriteManager.cropSprite(0,1), new Vector2D(800.f, 190.f), CharacterManager.getSpecies(GameManager.DWARF)));
 
+        getChildren().add(new Tile(new Vector2D(400.0, 400.0), new TileType("Forest", SpriteManager.cropSprite(1, 5), new ResourceType())));
+        getChildren().add(new Tile(new Vector2D(800.0, 20.0), new TileType("Forest", SpriteManager.cropSprite(1, 5), new ResourceType())));
+        getChildren().add(new Character(SpriteManager.cropSprite(0,1), new Vector2D(10.0, 400.0), CharacterManager.getSpecies(GameManager.DWARF)));
+        getChildren().add(new Character(SpriteManager.cropSprite(0,1), new Vector2D(50.0, 320.0), CharacterManager.getSpecies(GameManager.DWARF)));
     }
 
     public void stopTimer() {
