@@ -9,4 +9,13 @@ public class GameManager {
 
     public static ScreenMap root = new ScreenMap();
     public static boolean GAME_ON = true;
+
+    public enum GAME_SPEED {
+        PAUSE,
+        SLOW,
+        NORMAL,
+        FAST
+    }
+
+    public static GAME_SPEED CURRENT_SPEED = GAME_SPEED.NORMAL;
 }

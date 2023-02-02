@@ -35,7 +35,7 @@ public class Level implements DeltaTime {
 
     public float computeDeltaTime() {
         long time = System.nanoTime();
-        int deltaTime = (int) ((time - previousTime) / 1000000);
+        float deltaTime = (float) ((time - previousTime) / 1000000000.0);
         previousTime = time;
 
         return deltaTime;
@@ -74,7 +74,7 @@ public class Level implements DeltaTime {
                     new TileType(
                         "Forest",
                         SpriteManager.cropSprite(1, 5),
-                        ResourceFactory.getResourceType("WOOD", ResourceType.EGatherMethod.CHOPPING)
+                        ResourceFactory.getResourceType("WOOD", ResourceType.EGatherMethod.CHOPPING, 0.05f)
                     )
                 )
         );
@@ -84,7 +84,7 @@ public class Level implements DeltaTime {
                     new TileType(
                         "Forest",
                         SpriteManager.cropSprite(1, 5),
-                        ResourceFactory.getResourceType("WOOD")
+                        ResourceFactory.getResourceType("IRON", ResourceType.EGatherMethod.MINING, 0.04545f)
                     )
                 )
         );

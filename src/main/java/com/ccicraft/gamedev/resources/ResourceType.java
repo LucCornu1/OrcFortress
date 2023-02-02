@@ -7,9 +7,10 @@ public class ResourceType {
         this.gatherMethod = EGatherMethod.NONE;
     }
 
-    public ResourceType(String name, EGatherMethod gatherMethod) {
+    public ResourceType(String name, EGatherMethod gatherMethod, float gatheringSpeed) {
         this.name = name;
         this.gatherMethod = gatherMethod;
+        this.gatheringSpeed = gatheringSpeed;
     }
 
     // Variables
@@ -23,10 +24,11 @@ public class ResourceType {
     }
 
     private EGatherMethod gatherMethod;
-    private int resourceCount = 0;
+    private float resourceCount = 0;
+    private float gatheringSpeed = 0.2f;
 
     // Methods
-    public void addResource(int resourceCount) {
+    public void addResource(float resourceCount) {
         setResourceCount(getResourceCount() + resourceCount);
     }
 
@@ -39,11 +41,19 @@ public class ResourceType {
         this.gatherMethod = gatherMethod;
     }
 
-    public int getResourceCount() {
+    public float getResourceCount() {
         return resourceCount;
     }
 
-    public void setResourceCount(int resourceCount) {
+    public void setResourceCount(float resourceCount) {
         this.resourceCount = resourceCount;
+    }
+
+    public float getGatheringSpeed() {
+        return gatheringSpeed;
+    }
+
+    public void setGatheringSpeed(float gatheringSpeed) {
+        this.gatheringSpeed = gatheringSpeed;
     }
 }

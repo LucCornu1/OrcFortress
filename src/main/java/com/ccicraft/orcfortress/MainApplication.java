@@ -31,27 +31,6 @@ public class MainApplication extends Application {
 
         Level currentLevel = new Level();
         currentLevel.startTimer();
-
-        /*ScreenMap tm = new ScreenMap();
-        root.getChildren().add(new Rectangle(0, 0, 1920, 1080));
-        for (int i = 0; i < MAP_SIZE; i++) {
-            tm.placeTile("Forest", SpriteManager.cropSprite(2, 2), new ResourceFactory());
-        }
-        root.getChildren().add(tm);
-
-        for (int i = 0; i < 5; i++) {
-            tm.getScreen().getChildren().add(
-                    CharacterManager.createCharacter(DWARF,
-                    SpriteManager.cropSprite(15, 8),
-                    1.25f,
-                    1.15f,
-                    1.f,
-                    1.f)
-            );
-        }
-
-        // root.startTimer();
-        tm.startTimer();*/
     }
 
     public static void main(String[] args) {

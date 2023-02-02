@@ -18,7 +18,7 @@ public class Tile extends Actor {
 
     // Variables
     protected TileType type;
-    private int tileResources = ThreadLocalRandom.current().nextInt(9000) + 1000;
+    private float tileResources = ThreadLocalRandom.current().nextInt(9000) + 1000;
 
     public enum STATE{
         HIDDEN,
@@ -28,7 +28,7 @@ public class Tile extends Actor {
 
     // Methods
     public void update(float delta) {
-        // System.out.println("This is a Tile");
+        super.update(delta);
     }
 
     public void revealTile() {
@@ -44,26 +44,30 @@ public class Tile extends Actor {
             return;
         }
 
-        int gatherAmount = switch(getType().getResourceGathered().getGatherMethod()) {
-            case MINING -> (int) species.getMiningSpeed() * 2;
-            case GATHERING -> (int) species.getGatheringSpeed() * 2;
-            case HUNTING -> (int) species.getHuntingSpeed() * 2;
-            case CHOPPING -> (int) species.getChoppingSpeed() * 2;
-            case NONE -> 1;
+        float gatheringSpeed = getType().getResourceGathered().getGatheringSpeed();
+
+        float gatherAmount = switch(getType().getResourceGathered().getGatherMethod()) {
+            case MINING -> (float) (species.getMiningSpeed() * gatheringSpeed * currentDelta);
+            case GATHERING -> (float) (species.getGatheringSpeed() * gatheringSpeed * currentDelta);
+            case HUNTING -> (float) (species.getHuntingSpeed() * gatheringSpeed * currentDelta);
+            case CHOPPING -> (float) (species.getChoppingSpeed() * gatheringSpeed * currentDelta);
+            case NONE -> (float) (0.1f * currentDelta);
         };
 
         type.getResourceGathered().addResource(gatherAmount);
         tileResources -= gatherAmount;
-        // System.out.println(type.getResourceGathered().name
-        // + " count : "
-        // + type.getResourceGathered().getResourceCount());
+        /*System.out.println(type.getResourceGathered().name
+        + " count : "
+        + (int) type.getResourceGathered().getResourceCount());*/
     }
 
     private void setClickable() {
         sprite.setPickOnBounds(true);
         sprite.setOnMouseClicked(mouseEvent -> {
-            System.out.println("This tile is a : " + type.name);
-            System.out.println("It has : " + tileResources + " resources left");
+            if (CURRENT_STATE == STATE.DISCOVERED) {
+                System.out.println("This tile is a : " + type.name);
+                System.out.println("It has : " + tileResources + " resources left");
+            }
 
             if (CharacterManager.isAnySelected()) {
                 CharacterManager.getSelectedWorker().setTarget(this);
@@ -72,12 +76,12 @@ public class Tile extends Actor {
     }
 
     // Getters & Setters
-    public int getTileResources() {
+    public float getTileResources() {
         return tileResources;
     }
 
-    public void setTileResources(int tileResources) {
-        this.tileResources = Math.max(0, tileResources);
+    public void setTileResources(float tileResources) {
+        this.tileResources = Math.max(0.f, tileResources);
     }
 
     public TileType getType() {

@@ -8,10 +8,10 @@ public class ResourceFactory {
     private static Map<String, ResourceType> resourceTypes = new HashMap<>();
 
     // Factory
-    public static ResourceType getResourceType(String name, ResourceType.EGatherMethod gatherMethod) {
+    public static ResourceType getResourceType(String name, ResourceType.EGatherMethod gatherMethod, float gatheringSpeed) {
         ResourceType type = resourceTypes.get(name);
         if (type == null) {
-            type = new ResourceType(name, gatherMethod);
+            type = new ResourceType(name, gatherMethod, gatheringSpeed);
             resourceTypes.put(name, type);
         }
         return type;

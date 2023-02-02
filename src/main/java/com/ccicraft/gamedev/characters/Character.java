@@ -19,7 +19,7 @@ public class Character extends Actor {
     protected CharacterType type;
     private int uniqueID = -1;
     private Actor target = null;
-    private float characterSpeed = 3.f;
+    private float characterSpeed = 100.f;
 
     // Methods
     public void update(float delta) {
@@ -30,9 +30,9 @@ public class Character extends Actor {
 
     protected void moveCharacter(Vector2D target, Vector2D self) {
         double angle = target.computeAngle(self);
-        double currentX = self.x + characterSpeed * Math.cos(angle);
+        double currentX = self.x + characterSpeed * Math.cos(angle) * currentDelta;
         getSprite().setX(currentX);
-        double currentY = self.y + characterSpeed * Math.sin(angle);
+        double currentY = self.y + characterSpeed * Math.sin(angle) * currentDelta;
         getSprite().setY(currentY);
     }
 

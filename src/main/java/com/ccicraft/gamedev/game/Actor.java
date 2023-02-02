@@ -45,7 +45,7 @@ public class Actor extends GameObject {
 
     // Methods
     public void update(float delta) {
-        // pass
+        super.update(delta);
     }
 
     // Getters & Setters
