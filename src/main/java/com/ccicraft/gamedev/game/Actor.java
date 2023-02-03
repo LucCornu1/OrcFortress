@@ -10,6 +10,7 @@ public class Actor extends GameObject {
     public Actor(Image image) {
         sprite = new ImageView(image);
         GameManager.root.addRenderedActor(this);
+        setClickable();
     }
 
     public Actor(Image image, Vector2D pos) {
@@ -17,6 +18,7 @@ public class Actor extends GameObject {
         sprite.setX(pos.x);
         sprite.setY(pos.y);
         GameManager.root.addRenderedActor(this);
+        setClickable();
     }
 
     /*public Actor(Image image, Vector2D numCells, Vector2D firstFrame) {
@@ -40,8 +42,8 @@ public class Actor extends GameObject {
 
     // Variables
     protected ImageView sprite = null;
-    protected Vector2D numCells;
-    protected Rectangle2D[][] cellClips;
+    /*protected Vector2D numCells;
+    protected Rectangle2D[][] cellClips;*/
 
     // Methods
     public void update(float delta) {
@@ -55,5 +57,9 @@ public class Actor extends GameObject {
 
     public void setSprite(ImageView sprite) {
         this.sprite = sprite;
+    }
+
+    protected void setClickable() {
+        // Pass
     }
 }

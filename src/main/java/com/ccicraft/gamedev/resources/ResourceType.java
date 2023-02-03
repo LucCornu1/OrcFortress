@@ -1,13 +1,15 @@
 package com.ccicraft.gamedev.resources;
 
+import com.ccicraft.gamedev.game.GameManager;
+
 public class ResourceType {
     // Constructor
     public ResourceType(String name) {
         this.name = name;
-        this.gatherMethod = EGatherMethod.NONE;
+        this.gatherMethod = GameManager.EGatherMethod.NONE;
     }
 
-    public ResourceType(String name, EGatherMethod gatherMethod, float gatheringSpeed) {
+    public ResourceType(String name, GameManager.EGatherMethod gatherMethod, float gatheringSpeed) {
         this.name = name;
         this.gatherMethod = gatherMethod;
         this.gatheringSpeed = gatheringSpeed;
@@ -15,15 +17,8 @@ public class ResourceType {
 
     // Variables
     public String name = "";
-    public enum EGatherMethod {
-        NONE,
-        MINING,
-        GATHERING,
-        CHOPPING,
-        HUNTING
-    }
 
-    private EGatherMethod gatherMethod;
+    private GameManager.EGatherMethod gatherMethod;
     private float resourceCount = 0;
     private float gatheringSpeed = 0.2f;
 
@@ -33,11 +28,11 @@ public class ResourceType {
     }
 
     // Getters & Setters
-    public EGatherMethod getGatherMethod() {
+    public GameManager.EGatherMethod getGatherMethod() {
         return gatherMethod;
     }
 
-    public void setGatherMethod(EGatherMethod gatherMethod) {
+    public void setGatherMethod(GameManager.EGatherMethod gatherMethod) {
         this.gatherMethod = gatherMethod;
     }
 

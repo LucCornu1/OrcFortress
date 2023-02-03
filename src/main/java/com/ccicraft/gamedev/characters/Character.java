@@ -11,7 +11,6 @@ public class Character extends Actor {
     public Character(Image image, Vector2D pos, CharacterType type) {
         super(image, pos);
         this.type = type;
-        setClickable();
     }
 
     // Variables
@@ -66,7 +65,8 @@ public class Character extends Actor {
 
 
     // Clickable
-    private void setClickable() {
+    @Override
+    protected void setClickable() {
         sprite.setPickOnBounds(true);
         sprite.setOnMouseClicked(mouseEvent -> selectSelf());
     }

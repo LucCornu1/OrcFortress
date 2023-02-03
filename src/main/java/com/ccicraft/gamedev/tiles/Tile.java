@@ -13,7 +13,6 @@ public class Tile extends Actor {
     public Tile(Vector2D pos, TileType type) {
         super(TileType.getHiddenSprite(), pos);
         this.type = type;
-        setClickable();
     }
 
     // Variables
@@ -61,7 +60,8 @@ public class Tile extends Actor {
         + (int) type.getResourceGathered().getResourceCount());*/
     }
 
-    private void setClickable() {
+    @Override
+    protected void setClickable() {
         sprite.setPickOnBounds(true);
         sprite.setOnMouseClicked(mouseEvent -> {
             if (CURRENT_STATE == STATE.DISCOVERED) {

@@ -23,4 +23,13 @@ public class TileFactory {
         return type;
     }
 
+    public static TileType getTileType(String name) {
+        TileType type = tileTypes.get(name);
+        if (type == null) {
+            type = new TileType(name);
+            tileTypes.put(name, type);
+        }
+        return type;
+    }
+
 }

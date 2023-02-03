@@ -5,6 +5,7 @@ import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.gamedev.resources.ResourceFactory;
 import com.ccicraft.gamedev.resources.ResourceType;
 import com.ccicraft.gamedev.tiles.Tile;
+import com.ccicraft.gamedev.tiles.TileFactory;
 import com.ccicraft.gamedev.tiles.TileType;
 import com.ccicraft.maths.Vector2D;
 import javafx.animation.AnimationTimer;
@@ -12,7 +13,7 @@ import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 
 /***
- * The use of an AnimationTimer for game logic is not optimal, as it runs for each frame of the application
+ * The use of an AnimationTimer for game logic is not optimal
  * But due to lack of time, I settled for this solution
  * ***/
 
@@ -71,21 +72,13 @@ public class Level implements DeltaTime {
         getChildren().add(
                 new Tile(
                     new Vector2D(400.0, 400.0),
-                    new TileType(
-                        "Forest",
-                        SpriteManager.cropSprite(1, 5),
-                        ResourceFactory.getResourceType("WOOD", ResourceType.EGatherMethod.CHOPPING, 0.05f)
-                    )
+                    TileFactory.getTileType("Forest")
                 )
         );
         getChildren().add(
                 new Tile(
                     new Vector2D(800.0, 20.0),
-                    new TileType(
-                        "Forest",
-                        SpriteManager.cropSprite(1, 5),
-                        ResourceFactory.getResourceType("IRON", ResourceType.EGatherMethod.MINING, 0.04545f)
-                    )
+                    TileFactory.getTileType("Mine")
                 )
         );
         getChildren().add(

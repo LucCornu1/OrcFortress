@@ -12,6 +12,10 @@ public class TileType {
         this.resourceGathered = resourceFactoryGathered;
     }
 
+    public TileType(String name) {
+        this.name = name;
+    }
+
     // Variables
     public String name;
 
