@@ -53,7 +53,7 @@ public class Tile extends Actor {
             case NONE -> (float) (0.1f * currentDelta);
         };
 
-        if (type.building.getScaledBonus() != 0.f) {
+        if (type.building.getScaledBonus() <= 0.99f) {
             gatherAmount *= type.building.getScaledBonus();
         }
 

@@ -30,12 +30,7 @@ public class MainApplication extends Application {
         currentLevel.startTimer();
     }
 
-    public static void initGame() {
-
-    }
-
     public static void main(String[] args) {
-        initGame();
         launch();
     }
 }
