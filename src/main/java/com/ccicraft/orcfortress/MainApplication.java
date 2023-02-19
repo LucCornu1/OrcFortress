@@ -3,6 +3,9 @@ package com.ccicraft.orcfortress;
 import com.ccicraft.gamedev.characters.CharacterFactory;
 import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.gamedev.game.*;
+import com.ccicraft.gamedev.resources.ResourceFactory;
+import com.ccicraft.gamedev.resources.ResourceType;
+import com.ccicraft.gamedev.tiles.TileFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -21,19 +24,18 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // Use a builder pattern to avoid long constructors ?
-        CharacterFactory.getCharacterType(GameManager.DWARF,
-                SpriteManager.cropSprite(1, 1),
-                0.5f,
-                0.5f,
-                1.2f,
-                1.2f);
+
 
         Level currentLevel = new Level();
         currentLevel.startTimer();
     }
 
+    public static void initGame() {
+
+    }
+
     public static void main(String[] args) {
+        initGame();
         launch();
     }
 }

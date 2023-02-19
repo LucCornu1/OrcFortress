@@ -4,7 +4,9 @@ import com.ccicraft.gamedev.buildings.Building;
 import com.ccicraft.gamedev.buildings.BuildingFactory;
 import com.ccicraft.gamedev.buildings.BuildingType;
 import com.ccicraft.gamedev.characters.Character;
+import com.ccicraft.gamedev.characters.CharacterFactory;
 import com.ccicraft.gamedev.characters.CharacterManager;
+import com.ccicraft.gamedev.characters.CharacterType;
 import com.ccicraft.gamedev.resources.ResourceFactory;
 import com.ccicraft.gamedev.resources.ResourceType;
 import com.ccicraft.gamedev.tiles.Tile;
@@ -18,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /***
- * The use of an AnimationTimer for game logic is not optimal, as it runs for each frame of the application
+ * The use of an AnimationTimer for game logic is not optimal
  * But due to lack of time, I settled for this solution
  * ***/
 
@@ -85,8 +87,33 @@ public class Level implements DeltaTime {
 
     // Methods
     private void init() {
-        ResourceType WOOD = ResourceFactory.getResourceType("WOOD", ResourceType.EGatherMethod.CHOPPING, 0.05f);
-        ResourceType IRON = ResourceFactory.getResourceType("IRON", ResourceType.EGatherMethod.MINING, 0.04545f);
+        // Use a builder pattern to avoid long constructors ?
+        CharacterType DWARF = CharacterFactory.getCharacterType(GameManager.DWARF,
+                SpriteManager.cropSprite(1, 1),
+                0.5f,
+                0.5f,
+                1.2f,
+                1.2f);
+
+        CharacterType ORC = CharacterFactory.getCharacterType(GameManager.ORC,
+                SpriteManager.cropSprite(2, 4),
+                1.2f,
+                1.2f,
+                0.5f,
+                0.5f);
+
+        ResourceType WOOD = ResourceFactory.getResourceType("WOOD",
+                GameManager.EGatherMethod.CHOPPING,
+                0.05f);
+        ResourceType IRON = ResourceFactory.getResourceType("IRON",
+                GameManager.EGatherMethod.MINING,
+                0.045f);
+        ResourceType FRUIT = ResourceFactory.getResourceType("FRUIT",
+                GameManager.EGatherMethod.GATHERING,
+                0.1f);
+        ResourceType MEAT = ResourceFactory.getResourceType("MEAT",
+                GameManager.EGatherMethod.HUNTING,
+                0.09f);
 
         Map<ResourceType, Float> dwarfCost = new HashMap<ResourceType, Float>();
         dwarfCost.put(IRON, 10.f);
@@ -106,39 +133,34 @@ public class Level implements DeltaTime {
         );
         getChildren().add(SAWMILL);
 
+        TileType FOREST = TileFactory.getTileType("Forest", SpriteManager.cropSprite(5, 5), WOOD, SAWMILL);
+        TileType MINE = TileFactory.getTileType("Mine", SpriteManager.cropSprite(4, 5), IRON, SAWMILL);
+        TileType ORCHARD = TileFactory.getTileType("Orchard", SpriteManager.cropSprite(6, 5), FRUIT, SAWMILL);
+        TileType MEADOW = TileFactory.getTileType("Meadow", SpriteManager.cropSprite(5, 5), MEAT, SAWMILL);
+
         getChildren().add(
                 new Tile(
                         new Vector2D(400.0, 400.0),
-                        TileFactory.getTileType(
-                                "Forest",
-                                SpriteManager.cropSprite(1, 5),
-                                WOOD,
-                                SAWMILL
-                        )
+                        FOREST
                 )
         );
         getChildren().add(
                 new Tile(
                         new Vector2D(800.0, 20.0),
-                        TileFactory.getTileType(
-                                "Mine",
-                                SpriteManager.cropSprite(1, 5),
-                                IRON,
-                                SAWMILL
-                        )
+                        MINE
                 )
         );
 
         getChildren().add(
                 new Character(
                         new Vector2D(10.0, 400.0),
-                        CharacterManager.getSpecies(GameManager.DWARF)
+                        DWARF
                 )
         );
         getChildren().add(
                 new Character(
                         new Vector2D(50.0, 320.0),
-                        CharacterManager.getSpecies(GameManager.DWARF)
+                        DWARF
                 )
         );
     }
