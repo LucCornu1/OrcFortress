@@ -17,16 +17,16 @@ public class Tile extends Actor {
     }
 
     // Variables
-    protected TileType type;
-    private float tileResources = ThreadLocalRandom.current().nextInt(9000) + 1000;
-
     public enum STATE{
         HIDDEN,
         DISCOVERED
     };
+    protected TileType type;
+    protected float tileResources = ThreadLocalRandom.current().nextInt(9000) + 1000;
     protected STATE CURRENT_STATE = STATE.HIDDEN;
 
     // Methods
+    @Override
     public void update(float delta) {
         super.update(delta);
     }
@@ -39,7 +39,7 @@ public class Tile extends Actor {
         sprite.setImage(type.tileSprite);
     }
 
-    public void gatherResources(CharacterType species) {
+    public void interact(CharacterType species) {
         if (tileResources <= 0) { // Need to take into account that you cannot gather more resources than there is left
             return;
         }
@@ -54,8 +54,12 @@ public class Tile extends Actor {
             case NONE -> (float) (0.1f * currentDelta);
         };
 
+        if (type.building.getScaledBonus() != 0.f) {
+            gatherAmount *= type.building.getScaledBonus();
+        }
+
         type.getResourceGathered().addResource(gatherAmount);
-        tileResources -= gatherAmount;
+        setTileResources(tileResources - gatherAmount);
         /*System.out.println(type.getResourceGathered().name
         + " count : "
         + (int) type.getResourceGathered().getResourceCount());*/

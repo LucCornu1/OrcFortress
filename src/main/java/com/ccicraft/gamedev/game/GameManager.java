@@ -17,5 +17,19 @@ public class GameManager {
         FAST
     }
 
-    public static GAME_SPEED CURRENT_SPEED = GAME_SPEED.NORMAL;
+    private static GAME_SPEED CURRENT_SPEED = GAME_SPEED.NORMAL;
+
+    public static float getCurrentSpeedAsInteger() {
+        float t = switch (CURRENT_SPEED) {
+            case PAUSE -> 0.f;
+            case SLOW -> 0.5f;
+            case NORMAL -> 1.f;
+            case FAST -> 2.f;
+        };
+        return t;
+    }
+
+    public static void setCurrentSpeed(GAME_SPEED currentSpeed) {
+        CURRENT_SPEED = currentSpeed;
+    }
 }

@@ -1,15 +1,21 @@
 package com.ccicraft.gamedev.game;
 
+import com.ccicraft.gamedev.buildings.Building;
+import com.ccicraft.gamedev.buildings.BuildingFactory;
+import com.ccicraft.gamedev.buildings.BuildingType;
 import com.ccicraft.gamedev.characters.Character;
 import com.ccicraft.gamedev.characters.CharacterManager;
 import com.ccicraft.gamedev.resources.ResourceFactory;
 import com.ccicraft.gamedev.resources.ResourceType;
 import com.ccicraft.gamedev.tiles.Tile;
+import com.ccicraft.gamedev.tiles.TileFactory;
 import com.ccicraft.gamedev.tiles.TileType;
 import com.ccicraft.maths.Vector2D;
 import javafx.animation.AnimationTimer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /***
  * The use of an AnimationTimer for game logic is not optimal, as it runs for each frame of the application
@@ -38,7 +44,7 @@ public class Level implements DeltaTime {
         float deltaTime = (float) ((time - previousTime) / 1000000000.0);
         previousTime = time;
 
-        return deltaTime;
+        return deltaTime * GameManager.getCurrentSpeedAsInteger();
     }
 
     public void update() {
@@ -68,40 +74,7 @@ public class Level implements DeltaTime {
         timer.start();
         GameManager.root.startTimer();
 
-        getChildren().add(
-                new Tile(
-                    new Vector2D(400.0, 400.0),
-                    new TileType(
-                        "Forest",
-                        SpriteManager.cropSprite(1, 5),
-                        ResourceFactory.getResourceType("WOOD", ResourceType.EGatherMethod.CHOPPING, 0.05f)
-                    )
-                )
-        );
-        getChildren().add(
-                new Tile(
-                    new Vector2D(800.0, 20.0),
-                    new TileType(
-                        "Forest",
-                        SpriteManager.cropSprite(1, 5),
-                        ResourceFactory.getResourceType("IRON", ResourceType.EGatherMethod.MINING, 0.04545f)
-                    )
-                )
-        );
-        getChildren().add(
-                new Character(
-                    SpriteManager.cropSprite(0,1),
-                    new Vector2D(10.0, 400.0),
-                    CharacterManager.getSpecies(GameManager.DWARF)
-                )
-        );
-        getChildren().add(
-                new Character(
-                    SpriteManager.cropSprite(0,1),
-                    new Vector2D(50.0, 320.0),
-                    CharacterManager.getSpecies(GameManager.DWARF)
-                )
-        );
+        init();
     }
 
     public void stopTimer() {
@@ -111,6 +84,64 @@ public class Level implements DeltaTime {
     }
 
     // Methods
+    private void init() {
+        ResourceType WOOD = ResourceFactory.getResourceType("WOOD", ResourceType.EGatherMethod.CHOPPING, 0.05f);
+        ResourceType IRON = ResourceFactory.getResourceType("IRON", ResourceType.EGatherMethod.MINING, 0.04545f);
+
+        Map<ResourceType, Float> dwarfCost = new HashMap<ResourceType, Float>();
+        dwarfCost.put(IRON, 10.f);
+
+        Map<ResourceType, Float> orcCost = new HashMap<ResourceType, Float>();
+        orcCost.put(IRON, 10.f);
+
+        Building SAWMILL = new Building(
+                new Vector2D(0.0, 0.0),
+                BuildingFactory.getBuildingType(
+                        "Sawmill",
+                        SpriteManager.cropSprite(1, 0),
+                        1.15f,
+                        dwarfCost,
+                        orcCost
+                )
+        );
+        getChildren().add(SAWMILL);
+
+        getChildren().add(
+                new Tile(
+                        new Vector2D(400.0, 400.0),
+                        TileFactory.getTileType(
+                                "Forest",
+                                SpriteManager.cropSprite(1, 5),
+                                WOOD,
+                                SAWMILL
+                        )
+                )
+        );
+        getChildren().add(
+                new Tile(
+                        new Vector2D(800.0, 20.0),
+                        TileFactory.getTileType(
+                                "Mine",
+                                SpriteManager.cropSprite(1, 5),
+                                IRON,
+                                SAWMILL
+                        )
+                )
+        );
+
+        getChildren().add(
+                new Character(
+                        new Vector2D(10.0, 400.0),
+                        CharacterManager.getSpecies(GameManager.DWARF)
+                )
+        );
+        getChildren().add(
+                new Character(
+                        new Vector2D(50.0, 320.0),
+                        CharacterManager.getSpecies(GameManager.DWARF)
+                )
+        );
+    }
 
     // Getters & Setters
     public ArrayList<GameObject> getChildren() {

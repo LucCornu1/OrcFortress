@@ -1,5 +1,7 @@
 package com.ccicraft.gamedev.resources;
 
+import com.ccicraft.gamedev.buildings.Building;
+
 import java.util.HashMap;
 import java.util.Map;
 

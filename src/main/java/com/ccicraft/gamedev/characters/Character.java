@@ -1,6 +1,7 @@
 package com.ccicraft.gamedev.characters;
 
 import com.ccicraft.gamedev.game.Actor;
+import com.ccicraft.gamedev.game.GameManager;
 import com.ccicraft.gamedev.game.SpriteManager;
 import com.ccicraft.gamedev.tiles.Tile;
 import com.ccicraft.maths.Vector2D;
@@ -8,8 +9,8 @@ import javafx.scene.image.Image;
 
 public class Character extends Actor {
     // Constructor
-    public Character(Image image, Vector2D pos, CharacterType type) {
-        super(image, pos);
+    public Character(Vector2D pos, CharacterType type) {
+        super(type.characterSprite, pos);
         this.type = type;
         setClickable();
     }
@@ -37,7 +38,7 @@ public class Character extends Actor {
     }
 
     protected void gatherResources(Tile targetTile) {
-        targetTile.gatherResources(type);
+        targetTile.interact(type);
     }
 
     private void characterAction() {

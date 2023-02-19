@@ -1,5 +1,7 @@
 package com.ccicraft.gamedev.resources;
 
+import com.ccicraft.gamedev.buildings.Building;
+
 public class ResourceType {
     // Constructor
     public ResourceType(String name) {
